@@ -206,7 +206,7 @@ aside ul li:active {
 /* main */
 main {
    grid-area: "main";
-   padding: 8px 26px 132px 26px;
+   padding: 0 26px 132px 26px;
 }
 
 main .posts {
