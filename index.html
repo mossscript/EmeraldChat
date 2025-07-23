@@ -16,7 +16,8 @@
       <h1> Emerald Chat </h1>
    </header>
    <!-- float action button -->
-   <button id="FAB" class="material-symbols"> note_add </button>
+   <button onclick="showDialog('#post-form')" id="FAB1" class="material-symbols"> note_add </button>
+   <button onclick="showDialog('#search-form')" id="FAB2" class="material-symbols"> search </button>
    <!-- aside -->
    <aside>
       <span> Category </span>
@@ -27,6 +28,7 @@
          <li> Nature </li>
          <li> Art </li>
          <li> Music </li>
+         <li> Other </li>
       </ul>
    </aside>
    <!-- main -->
@@ -121,7 +123,58 @@
          </div>
       </div>
    </main>
+   <!-- footer --> 
+   <footer>
+         <span>Emerald Chat</span>
+         <span> - </span>
+         <span> &copy;2025 </span>
+   </footer>
    <!-- dioalogs -->
+   <!-- backdrop --> 
+   <div onclick="hideDialog()" id="backdrop"></div>
+   <!-- post form --> 
+   <form class="dialog" id="post-form" action="/">
+      <div class="header"> New Post </div>
+      <div class="body">
+         <div>
+            <span> Name: </span>
+            <input name="name" placeholder="Your name" type="text" maxlength="20" required>
+         </div>
+         <div>
+            <span> Category: </span>
+            <select name="category" required>
+               <option value="programing"> Programing </option>
+               <option value="sport"> Sport </option>
+               <option value="food"> Food </option>
+               <option value="nature"> Nature </option>
+               <option value="art"> Art </option>
+               <option value="music"> Music </option>
+               <option value="other"> Other </option>
+            </select>
+         </div>
+         <div>
+            <span> Messages: </span>
+            <textarea name="messages" placeholder="Your messages" maxlength="400" required></textarea>
+         </div>
+      </div>
+      <div class="footer">
+         <button onclick="hideDialog()" type="reset"> cancel </button>
+         <button type="submit"> post </button>
+      </div>
+   </form>
+   <!-- search form --> 
+   <form class="dialog" id="search-form" action="/">
+      <div class="header"> Search Post </div>
+      <div class="body">
+         <div>
+            <input name="name" placeholder="ID, Name or Category " type="text" maxlength="20" required>
+         </div>
+      </div>
+      <div class="footer">
+         <button onclick="hideDialog()" type="reset"> cancel </button>
+         <button type="submit"> Search </button>
+      </div>
+   </form>
    <!-- script -->
    <script src="main.js"></script>
 </body>

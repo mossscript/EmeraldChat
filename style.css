@@ -12,13 +12,17 @@
    --on-primary: hsl(0 0% 100%);
    --primary-container: hsl(160 50% 50% / 0.3);
    --on-primary-container: hsl(160 50% 20%);
+   --secondary: hsl(200 50% 40% / 0.8);
+   --on-secondary: hsl(0 0% 100%);
    --background: hsl(0 0% 95%);
    --on-background: hsl(0 0% 5%);
    --surface: hsl(0 0% 90%);
    --on-surface: hsl(0 0% 15%);
+   --surface-variant: hsl(0 0% 80%);
+   --on-surface-variant: hsl(0 0% 5%);
    --glass: hsl(0 0% 100% / 0.5);
+   --dark-glass: hsl(0 0% 0% / 0.5);
    --outline: hsl(0 0% 85%);
-   
 }
 
 /* material design symbols */
@@ -85,12 +89,13 @@ body {
    width: 100vw;
    min-height: 100vh;
    display: grid;
-   grid-template-rows: 60px 82px auto;
+   grid-template-rows: 60px 82px auto 70px;
    grid-template-columns: 1fr;
    grid-template-areas:
       "header"
       "aside"
-      "main";
+      "main"
+      "footer";
 }
 
 /* header */
@@ -113,14 +118,25 @@ header h1 {
 }
 
 /* FAB */
-#FAB{
+#FAB1{
    background: var(--primary);
    color: var(--on-primary);
-   position: fixed;
    right: 36px;
    bottom: 36px;
    width: 70px;
    height: 70px;
+} 
+#FAB2{
+   background: var(--secondary);
+   color: var(--on-secondary);
+   right: 46px;
+   bottom: 114px;
+   width: 50px;
+   height: 50px;
+} 
+
+#FAB1,#FAB2{
+   position: fixed;
    border: none;
    outline: none;
    border-radius: 20px;
@@ -133,9 +149,10 @@ header h1 {
       'wght' 400,
       'GRAD' 0,
       'opsz' 48;
-} 
+}
 
-#FAB:active{
+#FAB1:active,
+#FAB2:active {
    scale: 0.9;
    font-variation-settings:
       'FILL' 1,
@@ -360,15 +377,150 @@ main .comments>div>.body {
    padding: 16px;
 }
 
+/* footer */
+footer {
+   background: var(--surface-variant);
+   color: var(--on-surface-variant);
+   grid-area: footer;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 8px;
+}
+
+/* dialogs */
+#backdrop {
+   background: var(--dark-glass);
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   visibility: hidden;
+   z-index: 9;
+   opacity: 0;
+   backdrop-filter: blur(20px);
+   transition: 0.3s;
+}
+
+#backdrop.show {
+   opacity: 1;
+   visibility: visible;
+}
+
+.dialog{
+   background: var(--surface);
+   color: var(--on-surface);
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   translate: -50% -50%;
+   scale: 0.8;
+   z-index: 10;
+   width: 80%;
+   max-width: 400px;
+   border-radius: 24px;
+   visibility: hidden;
+   opacity: 0;
+   transition: 0.3s;
+}
+
+.dialog.show {
+   visibility: visible;
+   scale: 1;
+   opacity: 1;
+}
+
+.dialog .header {
+   border-bottom: 2px solid var(--outline);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 60px;
+   font-weight: 700;
+   font-size: 20px;
+}
+
+.dialog .body {
+   max-height: 300px;
+   overflow: hidden auto;
+   padding: 16px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+   gap: 8px;
+}
+
+.dialog .body > div {
+   display: flex;
+   flex-wrap: nowrap;
+   justify-content: space-between;
+   align-items: center;
+   gap: 8px;
+}
+
+.dialog .body > div:nth-last-child(1){
+   flex-wrap: wrap;
+}
+
+.dialog .footer {
+   border-top: 2px solid var(--outline);
+   display: flex;
+   justify-content: right;
+   align-items: center;
+   padding: 16px;
+   gap: 8px;
+}
+
+.dialog .footer button {
+   background: var(--surface-variant);
+   color: var(--on-surface-variant);
+   border: none;
+   padding: 8px 16px;
+   border-radius: 24px;
+   font-weight: 700;
+   font-size: 16px;
+}
+
+.dialog .footer button[type="submit"]{
+   background: var(--primary);
+   color: var(--on-primary);
+}
+
+/*** component ***/
+input, textarea, select{
+   border: 2px solid var(--outline);
+   background: var(--background);
+   color: var(--on-background);
+   width: 100%;
+   border-radius: 16px;
+   padding: 8px 16px;
+   vertical-align: middle;
+   font-weight: 400;
+   font-size: 14px;
+   outline: none;
+   resize: none;
+   cursor: pointer;
+   transition: 0.3s;
+}
+
+input:focus, textarea:focus{
+   border: 2px solid var(--primary);
+   background: var(--surface);
+   color: var(--on-surface);
+}
+
 /*** responsive ***/
 @media screen and (min-width: 450px) {
    /* body */
    body {
-      grid-template-rows: 70px auto;
+      grid-template-rows: 70px auto 70px;
       grid-template-columns: 250px auto;
       grid-template-areas:
          "header header"
-         "aside main";
+         "aside main"
+         "footer footer";
    }
    
    /* header */
@@ -376,6 +528,14 @@ main .comments>div>.body {
       grid-area: header;
       justify-content: left;
       z-index: 6;
+   }
+   
+   /* FAB 2 */
+   #FAB2 {
+      right: 112px;
+      bottom: 42px;
+      width: 60px;
+      height: 60px;
    }
    
    /* aside */
@@ -387,7 +547,7 @@ main .comments>div>.body {
       top: 70px;
       overflow: auto;
       width: 250px;
-      height: calc(100vh - 70px);
+      height: calc(100vh - 70px - 70px);
    }
    
    aside span {
@@ -437,4 +597,11 @@ main .comments>div>.body {
       grid-area: main;
       padding: 24px;
    }
+   
+   /* footer */
+   footer {
+      grid-area: footer;
+   }
 }
+
+/*** animation ***/
