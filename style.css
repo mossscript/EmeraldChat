@@ -1,0 +1,365 @@
+/* Import fronts */
+@font-face {
+   font-family: "Material Symbols Rounded";
+   font-style: normal;
+   font-weight: 100 700;
+   src: url(MaterialSymbolsRounded.woff2);
+}
+
+/* theme colors */
+:root {
+   --primary: hsl(160 50% 40% / 0.8);
+   --on-primary: hsl(0 0% 100%);
+   --primary-container: hsl(160 50% 50% / 0.3);
+   --on-primary-container: hsl(160 50% 20%);
+   --background: hsl(0 0% 95%);
+   --on-background: hsl(0 0% 5%);
+   --surface: hsl(0 0% 90%);
+   --on-surface: hsl(0 0% 15%);
+   --glass: hsl(0 0% 100% / 0.5);
+   --outline: hsl(0 0% 85%);
+   
+}
+
+/* material design symbols */
+/* https://fonts.google.com/icons */
+/* https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200 */
+.material-symbols {
+   font-family: "Material Symbols Rounded";
+   font-weight: normal;
+   font-style: normal;
+   font-size: 24px;
+   line-height: 1;
+   letter-spacing: normal;
+   text-transform: none;
+   display: inline-block;
+   white-space: nowrap;
+   word-wrap: normal;
+   direction: ltr;
+   -webkit-font-feature-settings: 'liga';
+   -webkit-font-smoothing: antialiased;
+   font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+   transition-property: font-variation-settings;
+   transition-duration: 0.3s;
+}
+
+.material-symbols.fill {
+   font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+}
+
+/*** default style ***/
+* {
+   user-select: none;
+   box-sizing: border-box;
+   font-family: sans-serif;
+   -webkit-tap-highlight-color: transparent;
+}
+
+img{
+   display: inline-block;
+   max-width: 100%;
+   border-radius: 16px;
+}
+
+/*** layouts ***/
+
+/* body */
+body {
+   background: var(--background);
+   color: var(--on-background);
+   margin: 0;
+   padding: 0;
+   width: 100vw;
+   min-height: 100vh;
+   display: grid;
+   grid-template-rows: 60px 82px auto;
+   grid-template-columns: 1fr;
+   grid-template-areas:
+      "header"
+      "aside"
+      "main";
+}
+
+/* header */
+header {
+   grid-area: "header";
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 0px 16px;
+   box-shadow: 0 0 30px #0002;
+   position: sticky;
+   top: 0;
+   z-index: 5;
+   backdrop-filter: blur(20px);
+}
+
+header h1 {
+   font-size: 24px;
+   font-weight: 700;
+}
+
+/* FAB */
+#FAB{
+   background: var(--primary);
+   color: var(--on-primary);
+   position: fixed;
+   right: 36px;
+   bottom: 36px;
+   width: 70px;
+   height: 70px;
+   border: none;
+   outline: none;
+   border-radius: 20px;
+   font-size: 28px;
+   backdrop-filter: blur(20px);
+   z-index: 5;
+   transition: 0.3s;
+   font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48;
+} 
+
+#FAB:active{
+   scale: 0.9;
+   font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 48;
+}
+
+/* aside */
+aside {
+   grid-area: "aside";
+   padding: 16px;
+   position: sticky;
+   top: 60px;
+   z-index: 5;
+}
+
+aside span {
+   display: none;
+}
+
+aside ul {
+   background: var(--primary-container);
+   color: var(--on-primary-container);
+   height: 50px;
+   border-radius: 24px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: stretch;
+   gap: 8px;
+   white-space: pre;
+   list-style-type: none;
+   margin: 0;
+   padding: 8px;
+   backdrop-filter: blur(20px);
+}
+
+aside ul li {
+   background: var(--glass);
+   color: var(--on-background);
+   margin: 0;
+   padding: 0 8px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-weight: 400;
+   transition: 0.3s;
+   cursor: pointer;
+   border-radius: 24px;
+}
+
+aside ul li.selected {
+   background: var(--background);
+   color: var(--on-background);
+}
+
+aside ul li:hover {
+   color: var(--primary);
+   font-weight: 700;
+}
+
+aside ul li:active {
+   scale: 0.9;
+}
+
+/* main */
+main {
+   grid-area: "main";
+   padding: 8px 26px 132px 26px;
+}
+
+main .posts {
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+   gap: 8px;
+}
+
+.posts>div {
+   background: var(--surface);
+   color: var(--on-surface);
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+}
+
+.posts>div>.header {
+   border-bottom: 2px solid var(--outline);
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   padding: 8px;
+   gap: 16px;
+}
+
+.posts>div>.header .avatar {
+   background: var(--background);
+   color: var(--on-background);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 40px;
+   height: 40px;
+   border-radius: 20px;
+}
+
+.posts>div>.header .name {
+   font-size: 16px;
+   font-weight: 700;
+}
+
+.posts>div>.body {
+   padding: 16px;
+}
+
+.posts>div>.footer {
+   display: flex;
+   justify-content: right;
+   align-items: center;
+   padding: 4px;
+   gap: 4px;
+}
+
+.posts>div>.footer>span {
+   width: 30px;
+   height: 30px;
+   font-size: 20px;
+   border-radius: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 0.8;
+   transition: 0.3s;
+}
+
+.posts>div>.footer>span:hover {
+   opacity: 1;
+   font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+}
+
+.posts>div>.footer>span:active {
+   background: var(--background);
+   opacity: 1;
+   scale: 0.9;
+}
+
+main .comments {
+   margin-top: 16px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+   gap: 8px;
+}
+
+main .comments>div {
+   background: var(--background);
+   border-radius: 16px;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: stretch;
+}
+
+main .comments>div>.header {
+   border-bottom: 2px solid var(--surface);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 8px;
+}
+
+main .comments>div>.header .name {
+   font-size: 14px;
+   font-weight: 700;
+}
+
+main .comments>div>.header .tools {
+   display: flex;
+   justify-content: right;
+   align-items: center;
+   gap: 4px;
+}
+
+main .comments>div>.header .tools>span {
+   width: 30px;
+   height: 30px;
+   font-size: 20px;
+   border-radius: 20px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 0.8;
+   transition: 0.3s;
+}
+
+main .comments>div>.header .tools>span:hover {
+   opacity: 1;
+   font-variation-settings:
+      'FILL' 1,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+}
+
+main .comments>div>.header .tools>span:active {
+   background: var(--surface);
+   opacity: 1;
+   scale: 0.9;
+}
+
+main .comments>div>.body {
+   padding: 16px;
+}
+
+/*** responsive ***/
+@media screen and (min-width: 400px) {
+   body {
+      grid-template-rows: 70px auto;
+      grid-template-columns: 200px auto;
+      grid-template-areas:
+         "header header"
+         "aside main";
+   }
+}
